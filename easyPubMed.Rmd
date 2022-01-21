@@ -1,0 +1,41 @@
+---
+title: "easyPubmed"
+author: "Elizabeth Permina"
+date: "1/8/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(easyPubMed)
+```
+
+
+
+```{r cars}
+dami_query <- "Damiano Fantini[AU] AND 2018[PDAT]"
+outfile <- batch_pubmed_download(dami_query, dest_file_prefix = "easyPM_ex001_")
+listed_articles <- articles_to_list(pubmed_data = outfile)
+custom_grep(listed_articles[[2]], "ArticleTitle", "char")
+```
+
+```{r}
+pubmedArticle<-listed_articles[1]
+article_to_df(pubmedArticle, autofill = FALSE,
+max_chars = 500, getKeywords = FALSE,
+getAuthors = TRUE)
+```
+
+
+```{r}
+dami_query_string <- "Damiano Fantini[AU]"
+dami_on_pubmed <- get_pubmed_ids(dami_query_string)
+dami_papers <- fetch_pubmed_data(dami_on_pubmed)
+```
+
+```{r}
+df<-article_to_df(dami_papers)
+a<-xmlToList(dami_papers, addAttributes = TRUE, simplify = FALSE)
+
+```
+

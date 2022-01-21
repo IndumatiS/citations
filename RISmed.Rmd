@@ -1,0 +1,36 @@
+---
+title: "rismed"
+author: "Elizabeth Permina"
+date: "1/5/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(RISmed)
+```
+
+```{r}
+res <- EUtilsSummary("single cell", type="esearch", db="pubmed", datetype='pdat', mindate=2019, maxdate=2021, retmax=20)
+```
+
+```{r}
+QueryCount(res)
+```
+```{r}
+t<-ArticleTitle(EUtilsGet(res)[1])
+```
+
+```{r}
+y <- YearPubmed(EUtilsGet(res))
+r <- YearReceived(EUtilsGet(res))
+au<-Author(EUtilsGet(res))
+id<-ArticleId(EUtilsGet(res))
+```
+
+## working with citations
+
+```{r}
+c<-Citations(EUtilsGet(res))
+```
+

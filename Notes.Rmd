@@ -1,0 +1,18 @@
+---
+title: "Notes"
+output: html_notebook
+---
+
+package citationsr
+
+
+```{r}
+install_github("paulcbauer/paperpiler")
+install_github("paulcbauer/citationsr")
+```
+
+extract text from those PDFs to analyze them. Here you can use the 
+extract_text() function
+
+
+The extract_citation_cases() function cycles through files ending on _processed.txt in the from folder and extracts citation cases. It writes both html (for easy lookup) and csv (for analyses later) to the to folder that are named according to the study whose impact we study, e.g. AcemogluJohnsonRobinson_2001_citation_cases.html and AcemogluJohnsonRobinson_2001_citation_cases.csv.

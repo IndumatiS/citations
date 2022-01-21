@@ -1,0 +1,30 @@
+---
+title: "readMe"
+author: "Elizabeth Permina"
+date: "1/22/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## RISmed
+
+RISmed is a package to extract data from PUBMED and parse the output. It has functions to process authors, title, abstract, etc. I'm looking for ways of extracting the reference list (which is a part of extracted xml record). Issue - I didn't find a way to parse it yet. The xml record of the reference list is highly nested and has a lot of repeating tags, so xml to dataframe functions don't work (columns with the same name error)
+
+XML package effectively translates full pubmed xml (with references) into a list with 1) non-unique names of variables 2) nested names like
+```{r, eval=FALSE}
+$PubmedArticle$PubmedData$ReferenceList$Reference$ArticleIdList
+$PubmedArticle$PubmedData$ReferenceList$Reference$ArticleIdList$ArticleId
+$PubmedArticle$PubmedData$ReferenceList$Reference$ArticleIdList$ArticleId$text
+$PubmedArticle$PubmedData$ReferenceList$Reference$ArticleIdList$ArticleId$.attrs
+  IdType 
+"pubmed" 
+$PubmedArticle$PubmedData$ReferenceList$Reference$PubmedArticle$PubmedData$ReferenceList$Reference$Citation
+```
+
+corresponding xml looks like that
+88dc43de-71be-11ec-8542-d21848e7cc81.xml
+to get an xml file out of PMID id (one by one)
+https://pubmed2xl.com/xml/
