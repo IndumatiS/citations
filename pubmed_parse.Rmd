@@ -1,0 +1,47 @@
+---
+title: "Searching and parsing pubmed"
+author: "Elizabeth Permina"
+date: "1/22/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## easyPubmed
+
+```{r}
+library(XML)
+library(easyPubMed)
+
+dami_query_string <- "Damiano Fantini[AU]"
+
+dami_on_pubmed <- get_pubmed_ids(dami_query_string)
+
+dami_papers <- fetch_pubmed_data(dami_on_pubmed)
+
+a<-xmlToList(dami_papers, addAttributes = TRUE, simplify = FALSE)
+
+
+```
+
+I can see that the reference list is in the a object, but I can't get my head around how to operate this list, especially to get out pubmed ids
+I have tried 
+
+
+```{r}
+a$PubmedArticle$PubmedData$ArticleIdList$ArticleId$text
+
+```
+
+```{r}
+a[[23]]$PubmedData$ReferenceList$Reference$ArticleIdList$PubmedData$ReferenceList$Reference$ArticleIdList$ArticleId$PubmedData$ReferenceList$Reference$ArticleIdList$ArticleId$text
+```
+
+Unlisting them seems to be helpful, but it gets out a very long vector, where I have to get every entry that comes after "PubmedData.ReferenceList.Reference.ArticleIdList.ArticleId.text"
+
+```{r}
+unlist(a[[23]])
+```
+
