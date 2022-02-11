@@ -39,3 +39,17 @@ a<-xmlToList(dami_papers, addAttributes = TRUE, simplify = FALSE)
 
 ```
 
+#Try this. The final object x will return a data frame of first and last name of authors.
+```{r}
+temp_list<-list()
+vector1<-c()
+vector2<-c()
+for(i in 1:length(a$PubmedArticle$MedlineCitation$Article$AuthorList)){
+  temp_list[i]<-a$PubmedArticle$MedlineCitation$Article$AuthorList[i]
+  vector1[i]<-as.vector(unlist(temp_list[i][[1]][1]))
+  vector2[i]<-as.vector(unlist(temp_list[i][[1]][2]))
+
+}
+
+x<-cbind(vector1,vector2)
+```
